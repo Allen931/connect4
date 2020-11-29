@@ -29,8 +29,7 @@ public class HumanPlayer extends GamePlayer {
     }
 
     @Override
-    public MonteCarloTree createDecisionTree(GameState game) {
-        return null;
+    public void createDecisionTree(GameState game) {
     }
 
     @Override

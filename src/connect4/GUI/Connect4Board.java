@@ -3,15 +3,14 @@ package connect4.GUI;
 import connect4.Core.GameState;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class Connect4Board extends Pane {
-    public Canvas canvas;
-    public GraphicsContext gc;
-    public GameState game;
-    double cell;
+    private Canvas canvas;
+    private GraphicsContext gc;
+    private GameState game;
+    private final double cell;
 
 
     public void setGameState(GameState game) {

@@ -6,7 +6,7 @@ import java.util.List;
 public class MonteCarloTree {
     Node root = null;
     Node currentNode = null;
-    GameState game;
+    final GameState game;
     GamePlayer thisPlayer;
 
     public MonteCarloTree(GameState game, GamePlayer player) {

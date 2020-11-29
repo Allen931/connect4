@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Board {
-    int connectNumber;
-    int column;
-    int row;
-    int[] availableY;
-    final int[][] board;
+    private final int connectNumber;
+    private final int column;
+    private final int row;
+    private final int[] availableY;
+    private final int[][] board;
 
     public Board(int column, int row, int connect) {
         board = new int[row][column];

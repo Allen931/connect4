@@ -3,9 +3,9 @@ package connect4.Core;
 import java.util.ArrayList;
 
 public class GameState {
-    Board board;
-    GamePlayer player1, player2;
-    GamePlayer currentPlayer;
+    private Board board;
+    private GamePlayer player1, player2;
+    private GamePlayer currentPlayer;
     Position lastPosition = null;
 
     public GameState(GamePlayer player1, GamePlayer player2, int column,

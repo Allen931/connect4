@@ -3,8 +3,8 @@ package connect4.Core;
 import java.io.PrintStream;
 
 public class GamePrinter {
-    PrintStream output;
-    GameState game;
+    private final PrintStream output;
+    private final GameState game;
 
     public GamePrinter(PrintStream output, GameState game) {
         this.output = output;
@@ -20,8 +20,8 @@ public class GamePrinter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        output.println(game.currentPlayer.playerName);
-        if (!game.currentPlayer.isHuman()) {
+        output.println(game.getCurrentPlayer().playerName);
+        if (!game.getCurrentPlayer().isHuman()) {
             output.println("Thinking...");
         } else {
             output.println("Please enter x and y.");
@@ -36,10 +36,10 @@ public class GamePrinter {
     }
 
     void printBoard() throws Exception {
-        for (int i = game.board.row - 1; i >= 0; i--) {
+        for (int i = game.getBoard().getRow() - 1; i >= 0; i--) {
             output.printf("%d", i);
-            for (int j = 0; j < game.board.column; j++) {
-                int piece = game.board.board[i][j];
+            for (int j = 0; j < game.getBoard().getColumn(); j++) {
+                int piece = game.getBoard().getBoard()[i][j];
                 if (piece == 0) {
                     output.printf(" %c", '.');
                 } else if (piece == 1) {
@@ -54,10 +54,18 @@ public class GamePrinter {
             output.println();
         }
         output.print(" ");
-        for (int k = 0; k < game.board.column; k++) {
+        for (int k = 0; k < game.getBoard().getColumn(); k++) {
             output.printf(" %d", k);
         }
         output.println();
+    }
+
+    void printWin() {
+        output.printf("WINNER: %s!", game.getOtherPlayer().playerName);
+    }
+
+    void printDraw() {
+        output.println("Draw!");
     }
 
 }

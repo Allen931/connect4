@@ -23,9 +23,9 @@ public class Main {
             printer.printGame();
             while (true) {
                 Position position;
-                if (game.currentPlayer.isHuman()) {
+                if (game.getCurrentPlayer().isHuman()) {
                     try {
-                        position = game.currentPlayer.nextStep();
+                        position = game.getCurrentPlayer().nextStep();
                         if (!game.checkPlaceable(position)) {
                             printer.printGame();
                             System.out.println("Invalid coordinates.");
@@ -36,10 +36,10 @@ public class Main {
                         continue;
                     }
                 } else {
-                    if (game.currentPlayer.mct == null) {
-                        game.currentPlayer.createDecisionTree(game);
+                    if (game.getCurrentPlayer().mct == null) {
+                        game.getCurrentPlayer().createDecisionTree(game);
                     }
-                    position = game.currentPlayer.nextStep();
+                    position = game.getCurrentPlayer().nextStep();
                 }
 
                 if (position != null) {
@@ -47,10 +47,12 @@ public class Main {
                 }
                 printer.printGame();
                 if (game.checkVictory()) {
+                    printer.printWin();
                     break;
+                } else if (game.checkDraw()) {
+                    printer.printDraw();
                 }
             }
-            System.out.printf("WINNER: %s!", game.getOtherPlayer().playerName);
         } catch (Exception e) {
             e.printStackTrace();
         }

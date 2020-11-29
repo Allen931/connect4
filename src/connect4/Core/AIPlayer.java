@@ -27,10 +27,9 @@ public class AIPlayer extends GamePlayer {
         return node.move;
     }
 
-    public MonteCarloTree createDecisionTree(GameState game) {
+    public void createDecisionTree(GameState game) {
         mct = new MonteCarloTree(game, this);
         mct.createRoot();
-        return mct;
     }
 
 

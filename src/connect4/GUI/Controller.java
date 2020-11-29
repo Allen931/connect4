@@ -15,7 +15,7 @@ public class Controller implements EventHandler<MouseEvent> {
     private final GameState game;
     private final GameScenePrinter printer;
     private final Time time;
-    volatile Position pos = null;
+    private Position pos = null;
 
     public Controller(GameState game, Connect4Board board, Label playerName, Label playerTimer) {
         this.game = game;
@@ -42,8 +42,8 @@ public class Controller implements EventHandler<MouseEvent> {
                     }
                 }
                 Platform.runLater(() -> {
-                    playerName.setText(game.getCurrentPlayer().playerName);
                     time.update(System.currentTimeMillis());
+                    playerName.setText(game.getCurrentPlayer().playerName);
                     if (game.getCurrentPlayer().isHuman()) {
                         playerTimer.setText(time.toString());
                     } else {

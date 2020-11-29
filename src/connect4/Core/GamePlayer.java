@@ -12,7 +12,7 @@ public abstract class GamePlayer {
 
     public abstract Position nextStep() throws Exception;
 
-    public abstract MonteCarloTree createDecisionTree(GameState game);
+    public abstract void createDecisionTree(GameState game);
 
     public abstract boolean isHuman();
 

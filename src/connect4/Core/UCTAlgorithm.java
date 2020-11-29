@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class UCTAlgorithm {
-    static double coefficient = 0.8;
+    private static final double coefficient = 0.8;
 
     public static Node uctSearch(MonteCarloTree tree) {
         long start = System.currentTimeMillis();
