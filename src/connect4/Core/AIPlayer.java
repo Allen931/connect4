@@ -24,6 +24,7 @@ public class AIPlayer extends GamePlayer {
         }
         MonteCarloTree.Node node = UCTAlgorithm.uctSearch(mct);
         mct.root = node;
+        mct.root.parent = null;
         mct.currentNode = mct.root;
         return node.move;
     }
