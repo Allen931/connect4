@@ -51,6 +51,7 @@ public class Main {
                     break;
                 } else if (game.checkDraw()) {
                     printer.printDraw();
+                    break;
                 }
             }
         } catch (Exception e) {

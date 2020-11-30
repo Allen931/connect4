@@ -16,6 +16,7 @@ public class AIPlayer extends GamePlayer {
             for (MonteCarloTree.Node child : mct.currentNode.children) {
                 if (mct.game.lastPosition.equals(child.move)) {
                     mct.root = child;
+                    mct.root.parent = null;
                     mct.currentNode = child;
                     break;
                 }

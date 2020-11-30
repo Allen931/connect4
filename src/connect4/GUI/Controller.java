@@ -17,12 +17,16 @@ public class Controller implements EventHandler<MouseEvent> {
     private final Time time;
     private Position pos = null;
 
-    public Controller(GameState game, Connect4Board board, Label playerName, Label playerTimer) {
+    /**
+     * @source https://stackoverflow.com/questions/35512648/adding-a-timer-to-my-program-javafx
+     * @source https://stackoverflow.com/questions/17758411/java-creating-a-new-thread
+     * @source https://stackoverflow.com/questions/21083945/how-to-avoid-not-on-fx-application-thread-currentthread-javafx-application-th
+     */
+    public Controller(GameState game, Connect4Board board, Label playerName, Label playerTimer, Label playerState) {
         this.game = game;
         printer = new GameScenePrinter(new Alert(Alert.AlertType.INFORMATION), game, board);
         Timer timer = new Timer();
         time = new Time(System.currentTimeMillis());
-
 
         if (!game.getCurrentPlayer().isHuman()) {
             aiPlay();
@@ -45,14 +49,15 @@ public class Controller implements EventHandler<MouseEvent> {
                     time.update(System.currentTimeMillis());
                     playerName.setText(game.getCurrentPlayer().playerName);
                     if (game.getCurrentPlayer().isHuman()) {
-                        playerTimer.setText(time.toString());
+                        playerState.setText("Your turn");
                     } else {
-                        playerTimer.setText("thinking...");
+                        playerState.setText("thinking...");
                     }
+                    playerTimer.setText(time.toString());
                 });
             }
         };
-        timer.scheduleAtFixedRate(timerTask,0 , 100);
+        timer.scheduleAtFixedRate(timerTask, 0, 100);
     }
 
     private void aiPlay() {
@@ -78,7 +83,6 @@ public class Controller implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent event) {
         double cell = 90;
-        Position position = null;
         if (game.getCurrentPlayer().isHuman()) {
             //get mouse coordinates
             double x = event.getX();
@@ -87,7 +91,7 @@ public class Controller implements EventHandler<MouseEvent> {
             int i = (int) ((x - 100) / cell);
             int j = 5 - (int) ((y - 100) / cell);
 
-            position = new Position(i, j);
+            Position position = new Position(i, j);
             synchronized (this) {
                 if (game.checkPlaceable(position)) {
                     pos = position;

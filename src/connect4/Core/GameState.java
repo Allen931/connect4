@@ -3,8 +3,8 @@ package connect4.Core;
 import java.util.ArrayList;
 
 public class GameState {
-    private Board board;
-    private GamePlayer player1, player2;
+    private final Board board;
+    private final GamePlayer player1, player2;
     private GamePlayer currentPlayer;
     Position lastPosition = null;
 
@@ -38,8 +38,8 @@ public class GameState {
         currentPlayer = getOtherPlayer();
     }
 
-    ArrayList<Position> getAvailablePositions() {
-        return board.getAvailablePositions();
+    ArrayList<Position> getPlaceablePositions() {
+        return board.getPlaceablePositions();
     }
 
     public boolean checkPlaceable(Position position) {
@@ -64,8 +64,16 @@ public class GameState {
         return currentPlayer.equals(player1) ? player2 : player1;
     }
 
-    public Board getBoard() {
-        return board;
+    public int[][] getBoard() {
+        return board.getBoard();
+    }
+
+    public int getColumn() {
+        return board.getColumn();
+    }
+
+    public int getRow() {
+        return board.getRow();
     }
 
     public GamePlayer getCurrentPlayer() {

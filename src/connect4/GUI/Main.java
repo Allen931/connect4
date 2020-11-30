@@ -68,18 +68,24 @@ public class Main extends Application {
         Connect4Board board = new Connect4Board(game);
 
         Label playerName = new Label(game.getCurrentPlayer().playerName);
+        Label playerState = new Label("Your turn");
         Label playerTimer = new Label("00: 00");
+
         playerName.setFont(new Font("Comic Sans MS", 48));
+        playerState.setFont(new Font("Comic Sans MS", 48));
         playerTimer.setFont(new Font("Comic Sans MS", 48));
-        playerName.setTranslateX(800);
-        playerName.setTranslateY(320);
-        playerTimer.setTranslateX(800);
-        playerTimer.setTranslateY(380);
+
+        playerName.setTranslateX(780);
+        playerName.setTranslateY(270);
+        playerState.setTranslateX(780);
+        playerState.setTranslateY(330);
+        playerTimer.setTranslateX(780);
+        playerTimer.setTranslateY(390);
 
         Group root = new Group();
-        root.getChildren().addAll(playerName, playerTimer, board);
+        root.getChildren().addAll(playerName, playerTimer, playerState, board);
 
-        board.setOnMouseClicked(new Controller(game, board, playerName, playerTimer));
+        board.setOnMouseClicked(new Controller(game, board, playerName, playerTimer, playerState));
 
         Scene scene = new Scene(root, 1030, 740);
         primaryStage.setScene(scene);

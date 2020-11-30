@@ -32,7 +32,7 @@ public class MonteCarloTree {
 
         private Node() {
             accessCounts = 1;
-            possibleMoves = game.getAvailablePositions();
+            possibleMoves = game.getPlaceablePositions();
             possibleMovesNumber = possibleMoves.size();
         }
 
@@ -41,7 +41,7 @@ public class MonteCarloTree {
             accessCounts = 1;
             this.move = move;
             isThisPlayer = !parent.isThisPlayer;
-            possibleMoves = game.getAvailablePositions();
+            possibleMoves = game.getPlaceablePositions();
             possibleMovesNumber = possibleMoves.size();
         }
 
@@ -56,6 +56,5 @@ public class MonteCarloTree {
         }
 
     }
-
 
 }

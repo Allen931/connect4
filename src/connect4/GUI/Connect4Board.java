@@ -35,17 +35,17 @@ public class Connect4Board extends Pane {
         //draw the panel
         gc.setStroke(Color.BLACK);
 
-        for (int i = 0; i < game.getBoard().getColumn(); i++) {
-            for (int j = 0; j < game.getBoard().getRow(); j++) {
+        for (int i = 0; i < game.getColumn(); i++) {
+            for (int j = 0; j < game.getRow(); j++) {
                 gc.strokeRect(100 + i * cell, 100 + cell * j, cell, cell);//set up one rectangle
             }
         }
     }
 
     public void drawChess() {
-        int[][] board = game.getBoard().getBoard();
-        for (int i = 0; i < game.getBoard().getColumn(); i++)
-            for (int j = 0; j < game.getBoard().getRow(); j++) {
+        int[][] board = game.getBoard();
+        for (int i = 0; i < game.getColumn(); i++)
+            for (int j = 0; j < game.getRow(); j++) {
                 if (board[j][i] == 1) {
                     gc.setFill(Color.BLACK);
                     gc.fillOval(100 + i * cell, canvas.getHeight() - 100 - (j + 1) * cell, cell, cell);

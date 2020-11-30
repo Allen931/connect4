@@ -7,14 +7,14 @@ public class Board {
     private final int connectNumber;
     private final int column;
     private final int row;
-    private final int[] availableY;
+    private final int[] placeableY;
     private final int[][] board;
 
     public Board(int column, int row, int connect) {
         board = new int[row][column];
         this.column = column;
         this.row = row;
-        availableY = new int[column];
+        placeableY = new int[column];
         connectNumber = connect;
     }
 
@@ -26,25 +26,25 @@ public class Board {
         board = Arrays.stream(originalBoard.board).map(int[]::clone).toArray(int[][]::new);
         column = originalBoard.column;
         row = originalBoard.row;
-        availableY = new int[column];
-        System.arraycopy(originalBoard.availableY, 0, availableY, 0, column);
+        placeableY = new int[column];
+        System.arraycopy(originalBoard.placeableY, 0, placeableY, 0, column);
         connectNumber = originalBoard.connectNumber;
     }
 
     void placePiece(GamePlayer player, int x, int y) {
         board[y][x] = player.piece;
-        availableY[x]++;
+        placeableY[x]++;
     }
 
     void deletePiece(int x, int y) {
         board[y][x] = 0;
-        availableY[x]--;
+        placeableY[x]--;
     }
 
     boolean checkPlaceable(int x, int y) {
         if (x < 0 || x >= column || y < 0 || y >= row) {
             return false;
-        } else return y == availableY[x];
+        } else return y == placeableY[x];
     }
 
     boolean checkVictory(int x, int y) {
@@ -55,18 +55,18 @@ public class Board {
         return checkVertical(piece, x, y) || checkHorizontal(piece, x, y) || checkDiagonal(piece, x, y);
     }
 
-    ArrayList<Position> getAvailablePositions() {
+    ArrayList<Position> getPlaceablePositions() {
         ArrayList<Position> positions = new ArrayList<>();
         for (int i = 0; i < column; i++) {
-            if (availableY[i] < row) {
-                positions.add(new Position(i, availableY[i]));
+            if (placeableY[i] < row) {
+                positions.add(new Position(i, placeableY[i]));
             }
         }
         return positions;
     }
 
     boolean isFull() {
-        for (int i : availableY) {
+        for (int i : placeableY) {
             if (i < row) {
                 return false;
             }
@@ -87,15 +87,16 @@ public class Board {
         return count >= 4;
     }
 
+    private boolean checkDiagonal(int piece, int x, int y) {
+        return checkLeftDiagonal(piece, x, y) || checkRightDiagonal(piece, x, y);
+    }
+
+
     private boolean checkLeftDiagonal(int piece, int x, int y) {
         int count = 1;
         count += countConnected(piece, x, y, -1, 1);
         count += countConnected(piece, x, y, 1, -1);
         return count >= 4;
-    }
-
-    private boolean checkDiagonal(int piece, int x, int y) {
-        return checkLeftDiagonal(piece, x, y) || checkRightDiagonal(piece, x, y);
     }
 
     private boolean checkRightDiagonal(int piece, int x, int y) {
@@ -124,15 +125,15 @@ public class Board {
         return count;
     }
 
-    public int getColumn() {
+    int getColumn() {
         return column;
     }
 
-    public int getRow() {
+    int getRow() {
         return row;
     }
 
-    public int[][] getBoard() {
+    int[][] getBoard() {
         return board;
     }
 }

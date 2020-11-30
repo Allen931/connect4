@@ -36,10 +36,10 @@ public class GamePrinter {
     }
 
     void printBoard() throws Exception {
-        for (int i = game.getBoard().getRow() - 1; i >= 0; i--) {
+        for (int i = game.getRow() - 1; i >= 0; i--) {
             output.printf("%d", i);
-            for (int j = 0; j < game.getBoard().getColumn(); j++) {
-                int piece = game.getBoard().getBoard()[i][j];
+            for (int j = 0; j < game.getColumn(); j++) {
+                int piece = game.getBoard()[i][j];
                 if (piece == 0) {
                     output.printf(" %c", '.');
                 } else if (piece == 1) {
@@ -54,7 +54,7 @@ public class GamePrinter {
             output.println();
         }
         output.print(" ");
-        for (int k = 0; k < game.getBoard().getColumn(); k++) {
+        for (int k = 0; k < game.getColumn(); k++) {
             output.printf(" %d", k);
         }
         output.println();

@@ -60,7 +60,7 @@ public class UCTAlgorithm {
         int step = 0;
         GameState game = new GameState(tree.game);
         while (!game.checkVictory() && step <= 12) {
-            ArrayList<Position> positions = game.getAvailablePositions();
+            ArrayList<Position> positions = game.getPlaceablePositions();
             if (positions.size() == 0) {
                 break;
             }
