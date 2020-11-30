@@ -49,7 +49,6 @@ public class GamePrinter {
                 } else {
                     throw new Exception("Invalid piece.");
                 }
-
             }
             output.println();
         }

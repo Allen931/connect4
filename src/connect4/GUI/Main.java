@@ -4,12 +4,15 @@ import connect4.Core.GamePlayer;
 import connect4.Core.GameState;
 import connect4.Core.PlayerFactory;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +92,11 @@ public class Main extends Application {
 
         Scene scene = new Scene(root, 1030, 740);
         primaryStage.setScene(scene);
+        
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            Platform.exit();
+            System.exit(0);
+        });
 
         primaryStage.setTitle("Connect4");
         primaryStage.setResizable(false);

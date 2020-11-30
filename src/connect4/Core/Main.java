@@ -22,24 +22,21 @@ public class Main {
             GamePrinter printer = new GamePrinter(System.out, game);
             printer.printGame();
             while (true) {
-                Position position;
-                if (game.getCurrentPlayer().isHuman()) {
-                    try {
-                        position = game.getCurrentPlayer().nextStep();
-                        if (!game.checkPlaceable(position)) {
-                            printer.printGame();
-                            System.out.println("Invalid coordinates.");
-                            continue;
-                        }
-                    } catch (Exception e) {
+                Position position = null;
+                if (!game.getCurrentPlayer().isHuman() && game.getCurrentPlayer().mct == null) {
+                        game.getCurrentPlayer().createDecisionTree(game);
+                }
+
+                try {
+                    position = game.getCurrentPlayer().nextStep();
+                    if (!game.checkPlaceable(position)) {
+                        printer.printGame();
                         System.out.println("Invalid coordinates.");
                         continue;
                     }
-                } else {
-                    if (game.getCurrentPlayer().mct == null) {
-                        game.getCurrentPlayer().createDecisionTree(game);
-                    }
-                    position = game.getCurrentPlayer().nextStep();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.exit(1);
                 }
 
                 if (position != null) {

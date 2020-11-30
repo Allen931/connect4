@@ -11,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static java.lang.System.currentTimeMillis;
+
 public class Controller implements EventHandler<MouseEvent> {
     private final GameState game;
     private final GameScenePrinter printer;
@@ -26,7 +28,7 @@ public class Controller implements EventHandler<MouseEvent> {
         this.game = game;
         printer = new GameScenePrinter(new Alert(Alert.AlertType.INFORMATION), game, board);
         Timer timer = new Timer();
-        time = new Time(System.currentTimeMillis());
+        time = new Time(currentTimeMillis());
 
         if (!game.getCurrentPlayer().isHuman()) {
             aiPlay();
@@ -37,7 +39,7 @@ public class Controller implements EventHandler<MouseEvent> {
                 synchronized (this) {
                     if (pos != null) {
                         game.play(pos);
-                        time.reset(System.currentTimeMillis());
+                        time.reset(currentTimeMillis());
                         pos = null;
                         Platform.runLater(printer::nextScene);
                         if (!game.getCurrentPlayer().isHuman()) {
@@ -46,7 +48,7 @@ public class Controller implements EventHandler<MouseEvent> {
                     }
                 }
                 Platform.runLater(() -> {
-                    time.update(System.currentTimeMillis());
+                    time.update(currentTimeMillis());
                     playerName.setText(game.getCurrentPlayer().playerName);
                     if (game.getCurrentPlayer().isHuman()) {
                         playerState.setText("Your turn");
