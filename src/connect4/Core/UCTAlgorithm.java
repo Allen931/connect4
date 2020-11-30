@@ -19,7 +19,7 @@ public class UCTAlgorithm {
     }
 
     public static void treePolicy(MonteCarloTree tree) {
-        while (!tree.game.checkVictory()) {
+        while (!tree.game.checkVictory() && !tree.game.checkDraw()) {
             if (tree.currentNode.isFullyExpanded()) {
                 if (tree.currentNode.children.size() == 0) {
                     return;
@@ -59,7 +59,7 @@ public class UCTAlgorithm {
     public static double defaultPolicy(MonteCarloTree tree) {
         int step = 0;
         GameState game = new GameState(tree.game);
-        while (!game.checkVictory() && step <= 12) {
+        while (!game.checkVictory() && !game.checkDraw() && step <= 12) {
             ArrayList<Position> positions = game.getPlaceablePositions();
             if (positions.size() == 0) {
                 break;
